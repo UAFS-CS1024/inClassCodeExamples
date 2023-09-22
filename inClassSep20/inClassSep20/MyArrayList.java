@@ -31,6 +31,9 @@ public class MyArrayList {
 	}
 	
 	public void append(int value) {
+		if(size==theArray.length) {
+			reSize();
+		}
 		theArray[size]=value;
 		size++;
 	}
@@ -58,4 +61,30 @@ public class MyArrayList {
 		theArray = dest;
 	}
 	
+	public void add(int index, int value) {
+		theArray[index]=value;
+	}
+	
+	public int indexOf(int value) {
+		int location=-1;
+		int index;
+		
+		for(index=0;index<size;index++) {
+			if(theArray[index]==value) {
+				location=index;
+				break;
+			}
+		}
+		return location;
+	}
+	
+	public int[] toArray() {
+		int[] temp = new int[size];
+		int index;
+		
+		for(index=0;index<size;index++) {
+			temp[index]=theArray[index];
+		}
+		return temp;
+	}
 }
