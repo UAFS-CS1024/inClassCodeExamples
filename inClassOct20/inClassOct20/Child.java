@@ -16,4 +16,10 @@ public class Child extends Parent {
 		super.show();
 		System.out.printf("Color: %s\n", this.getColor());
 	}
+
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 }

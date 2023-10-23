@@ -1,6 +1,6 @@
 package inClassOct20;
 
-public class Parent {
+ abstract public class Parent {
 	private String name;
 	private int id;
 	
@@ -16,6 +16,8 @@ public class Parent {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	abstract public void update();
 	
 	public void show() {
 		System.out.printf("ID:   %d\n", this.getId());
