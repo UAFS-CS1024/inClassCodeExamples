@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class GameWindow extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private Dimension size;
 	private GamePanel game;
 	
