@@ -1,6 +1,11 @@
 package inClassOct30;
 
 public class Course implements Record {
+	public final int COURSENO = 0;
+	public final int TITLE = 1;
+	public final int CREDITHRS = 2;
+	public final int INSTRUCTOR = 3;
+	
 	private String courseNo;
 	private String title;
 	private int creditHrs;
@@ -31,6 +36,10 @@ public class Course implements Record {
 		this.instructor = instructor;
 	}
 	
+	public Course() {
+		
+	}
+	
 	public Course(String courseNo, String title, int creditHrs, String instructor) {
 		this.setCourseNo(courseNo);
 		this.setTitle(title);
@@ -39,12 +48,19 @@ public class Course implements Record {
 	}
 	@Override
 	public String serialize() {
-		// TODO Auto-generated method stub
-		return null;
+		String str = this.getCourseNo() + "," + this.getTitle() + "," +
+				this.getCreditHrs() + "," + this.getInstructor();
+		return str;
 	}
 	@Override
 	public void deSerialize(String str) {
-		// TODO Auto-generated method stub
+		String[] fields;
+		
+		fields=str.split(",");
+		this.setCourseNo(fields[COURSENO]);
+		this.setTitle(fields[TITLE]);
+		this.setCreditHrs(Integer.parseInt(fields[CREDITHRS]));
+		this.setInstructor(fields[INSTRUCTOR]);
 		
 	}
 
