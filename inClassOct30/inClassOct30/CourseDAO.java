@@ -3,14 +3,40 @@ package inClassOct30;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class CourseDAO implements DAO {
-	private static ArrayList<Course> courses;
+	private ArrayList<Course> courses;
+	String fileName;
 	
 	public CourseDAO() {
+		courses = new ArrayList<Course>();
+		fileName = "courses.txt";
 		loadFromFile();
+	}
+	
+	private void saveToFile() {
+		FileWriter writeFile;
+		PrintWriter out;
+		Course course;
+		int index;
+		
+		try {
+			writeFile = new FileWriter(fileName);
+			out = new PrintWriter(writeFile);
+			for(index=0;index<courses.size();index++) {
+				course = courses.get(index);
+				out.println(course.serialize());
+			}
+			out.close();
+			writeFile.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void loadFromFile() {
@@ -20,7 +46,7 @@ public class CourseDAO implements DAO {
 		Course course;
 		
 		try {
-			readFile = new FileReader("courses.txt");
+			readFile = new FileReader(fileName);
 			in = new BufferedReader(readFile);
 			buffer=in.readLine();
 			while(buffer!=null) {
@@ -44,31 +70,58 @@ public class CourseDAO implements DAO {
 	
 	@Override
 	public ArrayList<Course> getCourses() {
-		// TODO Auto-generated method stub
-		return null;
+		return courses;
 	}
 
 	@Override
 	public Course getCourse(String courseNo) {
-		// TODO Auto-generated method stub
-		return null;
+		int index;
+		Course course=null;
+		
+		for(index=0;index<courses.size();index++) {
+			if(courses.get(index).getCourseNo().equals(courseNo)){
+				course = courses.get(index);
+				break;
+			}
+		}
+		
+		return course;
 	}
 
 	@Override
 	public int addCourse(Course course) {
-		// TODO Auto-generated method stub
+		courses.add(course);
+		saveToFile();
 		return 0;
 	}
 
 	@Override
 	public int deleteCourse(String courseNo) {
-		// TODO Auto-generated method stub
+		int index;
+		Course course=null;
+		
+		for(index=0;index<courses.size();index++) {
+			if(courses.get(index).getCourseNo().equals(courseNo)){
+				courses.remove(index);
+				break;
+			}
+		}
+		saveToFile();
 		return 0;
 	}
 
 	@Override
 	public int updateCourse(Course course) {
-		// TODO Auto-generated method stub
+		int index;
+		
+		for(index=0;index<courses.size();index++) {
+			if(courses.get(index).getCourseNo().equals(course.getCourseNo())){
+				courses.remove(index);
+				courses.add(index, course);
+				break;
+			}
+		}
+		saveToFile();
 		return 0;
 	}
 
