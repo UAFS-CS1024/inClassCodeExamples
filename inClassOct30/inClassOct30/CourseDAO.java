@@ -60,7 +60,7 @@ public class CourseDAO implements DAO {
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.printf("File not found...\n");
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
